@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--配置User对象创建-->
+    <bean id="user" class="com.wuhu.spring5.User"></bean>
+    <!--set方法注入属性-->
+    <bean id="book" class="com.wuhu.spring5.test.book">
+        <property name="name" value="wuhu"></property>
+    </bean>
+    <!--有参构造注入属性-->
+    <bean id="book" class="com.wuhu.spring5.test.book">
+        <constructor-arg name="name" value="wuhu"></constructor-arg>
+    </bean>
+
+    <!--1.service和dao对象创建-->
+    <bean id="userService" class="com.wuhu.spring5.service.userService">
+    <!--注入userDao对象
+          name属性值：类里面属性名称
+          ref属性：创建userDao对象bean标签的id值 -->
+    <property name="userDao" ref="userDao"></property>
+    </bean>
+    <bean id="userDao" class="com.wuhu.spring5.dao.userDaoImpl"></bean>
+
+    <!--设置两个普通属性-->
+    <bean id="emp" class="com.wuhu.spring5.bean.Emp">
+        <!--设置两个普通属性-->
+        <property name="name" value="lucy"></property>
+        <property name="gender" value="女"></property>
+        <!--级联赋值-->
+        <property name="dept" ref="dept"></property>
+        <!--设置对象类型属性-->
+        <property name="dept">
+            <bean id="dept" class="com.wuhu.spring5.bean.Dept">
+                <property name="name" value="安保"></property>
+            </bean>
+        </property>
+    </bean>
+
+
+    <!--集合类型属性的注入-->
+    <bean id="stu" class="com.wuhu.spring5.bean.Stu">
+        <!--数组类型属性注入-->
+        <property name="courses">
+            <array>
+                <value>wuhu</value>
+                <value>qifei</value>
+            </array>
+        </property>
+        <!--List类型属性注入-->
+        <property name="list">
+            <list>
+                <value>韩金龙</value>
+                <value>韩银龙</value>
+            </list>
+        </property>
+        <!--Map类型属性注入-->
+        <property name="maps">
+            <map>
+                <entry key="WUHU" value="QIFEI"></entry>
+            </map>
+        </property>
+        <!--Set类型属性注入-->
+        <property name="sets">
+            <value>aaa</value>
+        </property>
+    </bean>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
